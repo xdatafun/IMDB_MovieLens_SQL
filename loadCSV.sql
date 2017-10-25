@@ -1,0 +1,77 @@
+DROP DATABASE IF EXISTS moviedb;
+CREATE DATABASE moviedb;
+USE moviedb;
+SELECT DATABASE();
+
+DROP TABLE IF EXISTS link; 
+CREATE TABLE link (
+	movieId INT UNSIGNED NOT NULL PRIMARY KEY,
+    imdbId VARCHAR(10),
+    tmdbId VARCHAR(10));
+
+LOAD DATA LOCAL INFILE '/Users/xxin/PetP/links.csv'
+	INTO TABLE link
+	FIELDS TERMINATED BY ','
+	LINES TERMINATED BY '\r\n';
+
+DROP TABLE IF EXISTS tag;
+CREATE TABLE tag (
+	userId INT UNSIGNED NOT NULL,
+    movieId INT UNSIGNED NOT NULL,
+    tag VARCHAR(200));
+
+LOAD DATA LOCAL INFILE '/Users/xxin/PetP/tags.csv'
+	INTO TABLE tag
+    FIELDS TERMINATED BY ','
+    LINES TERMINATED BY '\r\n'
+    IGNORE 1 LINES;
+
+DROP TABLE IF EXISTS movie;
+CREATE TABLE movie (
+	movieId INT UNSIGNED NOT NULL PRIMARY KEY,
+    title VARCHAR(200),
+    genre VARCHAR(500));
+
+LOAD DATA LOCAL INFILE '/Users/xxin/PetP/movies.csv'
+	INTO TABLE movie
+    FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+    LINES TERMINATED BY '\r\n'
+    IGNORE 1 LINES;
+    
+DROP TABLE IF EXISTS rating;
+CREATE TABLE rating (
+	userId INT UNSIGNED NOT NULL,
+    movieId INT UNSIGNED NOT NULL,
+    rating FLOAT); 
+    
+LOAD DATA LOCAL INFILE '/Users/xxin/PetP/ratings.csv'
+	INTO TABLE rating
+    FIELDS TERMINATED BY ','
+    LINES TERMINATED BY '\r\n'
+    IGNORE 1 LINES; 
+
+DROP TABLE IF EXISTS tagLink;
+CREATE TABLE tagLink (
+	tagId INT UNSIGNED PRIMARY KEY,
+    tag VARCHAR(100));
+
+LOAD DATA LOCAL INFILE '/Users/xxin/PetP/genome-tags.csv'
+	INTO TABLE tagLink
+    FIELDS TERMINATED BY ','
+    LINES TERMINATED BY '\r\n'
+    IGNORE 1 LINES; 
+    
+DROP TABLE IF EXISTS relevance;
+CREATE TABLE relevance (
+	movieId INT UNSIGNED,
+    tagId INT UNSIGNED,
+    relevance FLOAT);
+
+LOAD DATA LOCAL INFILE '/Users/xxin/PetP/genome-scores.csv'
+	INTO TABLE relevance
+    FIELDS TERMINATED BY ','
+    LINES TERMINATED BY '\r\n'
+    IGNORE 1 LINES; 
+
+
+
