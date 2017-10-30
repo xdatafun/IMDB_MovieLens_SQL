@@ -29,4 +29,20 @@ MovieLens provided 20 million ratings from 1995 to 2015, IMDB provided metadata 
   - movies.csv (movieId,title,genres)(genres have multiple value in one cell, separated by |)(with primary key)
   - links.csv (movieId,imbdId,tmdbId)(with primary key)
   
+### take a look
+I ran a few query to explore the MovieLens tags and ratings. A few observations:
+  - there are 26744 movies being rated in MovieLens data 
+  - there are 1128 distinct tags created by users
+  - about 50 tags are used over 1000 times, on the top is 'sci-fi', 'based on a book', 'atmospheric', 'comedy', 'action', 'Nudity(Topless)', 'surreal', 'twist ending', 'BD-R'
+  - movies that are most frequently tagged: Pulp Fiction, Fight Club, Inception, The Matrix, Shawshank Redemption, Eternal Sunshine of the Spotless Mind, etc.
+  - movies got most number of distinct tags: Pulp Fiction, Forrest Gump, Fight Club, The Matrix, Avatar, Blade Runner, Star Wars: IV 
+  - Pulp fiction is most frequently tagged as 'Quentin Tarantino', 'dark comedy', 'nonlinear', 'Samuel L. Jackson', 'multiple storylines', 'cult film'
+  - Fight club is most frequently tagged as 'twist ending', 'Edward Norton', 'Brad Pitt', 'psychology', 'dark comedy', 'social comentary', 'surreal'
+  - movies rated most frequently: Pulp Fiction, Forrest Gump, Shawshank Redemption, Silence of the Lambs, Jurassic Park
+  
+The last query I tried two ways, in order to match movie id of rating table to movie id of move table to get the title, one was to join two tables, count the frequency of ratings, and select those over 50000 times; the other was to query the movies and their rating frequency table, then join with movie table to get the title. It turned out, the former way cost about 28 seconds, the latter cost about 11 seconds.  
+
+    
+
+  
  [to be continued]
